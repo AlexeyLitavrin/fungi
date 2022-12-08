@@ -1,0 +1,2 @@
+db.ts(1,21): error TS2307: Cannot find module 'fs' or its corresponding type declarations.
+db.ts(4,16): error TS2304: Cannot find name 'assets_folder'.
