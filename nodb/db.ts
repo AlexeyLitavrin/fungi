@@ -9,15 +9,15 @@ const ZONES: string[] = fs.readFileSync( "./zones" ,'utf8').trim().split("\n");
 //console.log( ZONES )
 
 class Mushroom {
-  public appendDate: Date;
-  public name: string;
-  public index: number | string;
-  public zone: number[];
-  public gmapsLink: string;
-  public redBook: boolean | string;
-  public eatable: boolean | string;
-  public description: string;
-  public familie: number[];
+  public readonly appendDate: Date;
+  public readonly name: string;
+  public readonly index: number | string;
+  public readonly zone: number[];
+  public readonly gmapsLink: string;
+  public readonly redBook: boolean | string;
+  public readonly eatable: boolean | string;
+  public readonly description: string;
+  public readonly familie: number[];
 
   constructor ( list: string[] ){
 
@@ -43,27 +43,44 @@ class Mushroom {
   }
 
   show () {
-    console.log ( "\n=== " + this.name + " ===\n" )
-    console.log ( "Append date: " + this.appendDate.toString() )
-    console.log ( this.index )
-    console.log ( this.zone )
-    console.log ( this.gmapsLink )
-    console.log ( this.redBook )
-    console.log ( this.eatable )
-    console.log ( this.description )
-    console.log ( this.familie )
+    console.log ( "\n=== " + this.name + " ===\n" );
+    console.log ( "Append date: " + this.appendDate.toString() );
+    console.log ( this.index );
+    console.log ( this.zone );
+    console.log ( this.gmapsLink );
+    console.log ( this.redBook );
+    console.log ( this.eatable );
+    console.log ( this.description );
+    console.log ( this.familie );
   }
 
   getImgSrc () {
-    return IMGPATH + this.index.toString () + ".jpg"
+    return IMGPATH + this.index.toString () + ".jpg";
   }
 }
 
+function getFileList ( path: string = FILEPATH ): string[] {
 
+  let output: string[] = [];
 
-fs.readdirSync(FILEPATH).forEach((filename) => {
-  let mushroomData: string[] = fs.readFileSync( FILEPATH+filename ,'utf8').trim().split("\n"); 
-  let m = new Mushroom ( mushroomData );
-  console.log ( m.getImgSrc() );
-});
+  fs.readdirSync(path).forEach((filename) => {
+    output.push ( filename );
+  });
+
+  return output;
+}
+
+function parseMushrooms ( filelist: string[] ): Mushroom[] {
+  let output: Mushroom[] = [];
+  for ( let i = 0; i < filelist.length; i++ ){
+    output.push ( new Mushroom ( fs.readFileSync( FILEPATH + filelist[i] ,'utf8').trim().split("\n"))); 
+  }
+  return output;
+}
+
+let mushrooms: Mushroom[] = parseMushrooms ( getFileList () )
+
+for ( let i = 0; i < mushrooms.length; i++ ){
+  mushrooms[i].show()
+}
 
