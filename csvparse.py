@@ -41,6 +41,7 @@ def getZoneIds ( zonelist ):
 
 with open ("answers.csv", "r") as file:
     answers = file.read ().strip().split("\n")[1:]
+    answLists = []
     for answer in answers:
         answer = answer.split ("\"")
         answList = []
@@ -61,12 +62,20 @@ with open ("answers.csv", "r") as file:
         elif answList[6] == "Нет": answList[6] = 0
         elif answList[6]: answList[6] = 2
 
-        with open ( "./nodb/mushrooms/" + answList[2] + ".json", "w" ) as file:
-            file.write ( "{\n" )
+        answLists.append (answList )
+
+    with open ( "./nodb/mushrooms.json", "w" ) as file:
+        file.write ( "{\n\t\"mushrooms\" : [\n" )
+        for alIndex, answList in enumerate ( answLists ):
+            file.write ( "\t{\n" )
             for index, item in enumerate ( answList ):
-                if index == len (answList) - 1:
-                    file.write ( "\t\"" + formating[index] + "\" : \"" + str ( item ) + "\"\n" )
-                else:
-                    file.write ( "\t\"" + formating[index] + "\" : \"" + str ( item ) + "\",\n" )
- 
-            file.write ( "}" )
+
+                if index == len (answList) - 1: file.write ( "\t\t\"" + formating[index] + "\" : \"" + str ( item ) + "\"\n" )
+                else: file.write ( "\t\t\"" + formating[index] + "\" : \"" + str ( item ) + "\",\n" )
+
+            print ( alIndex )
+            print (len ( answLists ) - 1 ) 
+            if ( alIndex == len ( answLists ) - 1 ): file.write ( "\n\t}\n" )
+            else:file.write ( "\n\t},\n" )
+
+        file.write ( "\t]\n}" )

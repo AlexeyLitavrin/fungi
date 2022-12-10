@@ -57,28 +57,21 @@ class Mushroom {
   }
 }
 
-function getFileList (): string[] {
-  let filelist =  require ( "./filelist.json" ).ids//JSON.parse (
-
-  return filelist.map ( (id: string) => id + ".json")
-}
-
-function parseMushrooms ( filelist: string[] ): Mushroom[] {
+function getAllMushrooms (): Mushroom[]{
+  let Mushrooms =  require ( "./mushrooms.json" ).mushrooms//JSON.parse (
   let output: Mushroom[] = [];
-  for ( let i = 0; i < filelist.length; i++ ){
-    output.push ( new Mushroom ( require ( FILEPATH + filelist[i]))); 
+  for ( let i = 0; i < Mushrooms.length; i++ ){
+    output.push ( new Mushroom ( Mushrooms[i] )); 
   }
   return output;
 }
 
-function getAllMushrooms (): Mushroom[]{
-  return parseMushrooms ( getFileList () )
-}
+let mushrooms = getAllMushrooms ()
 
 //console.log ( getFileList () )
 
 
-//for ( let i = 0; i < mushrooms.length; i++ ){
-//  mushrooms[i].show()
-//}
+for ( let i = 0; i < mushrooms.length; i++ ){
+  mushrooms[i].show()
+}
 
