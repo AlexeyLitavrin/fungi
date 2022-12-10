@@ -1,5 +1,17 @@
 import drive.parser
 
+formating = [
+        "time",
+        "name",
+        "id",
+        "zones",
+        "gmapsLink",
+        "redBook",
+        "eatable",
+        "description",
+        "familie"
+        ]
+
 def getFamiliesIds ( famlist ):
     rstr = ""
     with open ( "./nodb/families", "r" ) as file:
@@ -26,7 +38,6 @@ def getZoneIds ( zonelist ):
 
     return rstr
 
-            
 
 with open ("answers.csv", "r") as file:
     answers = file.read ().strip().split("\n")[1:]
@@ -39,7 +50,6 @@ with open ("answers.csv", "r") as file:
 
         answList[2] = answList[2].split("id=")[-1]
         drive.parser.downloadFiles ( [answList[2]] )
-
         answList[3] = getZoneIds ( answList[3].strip().split (";") )
 
         answList[-1] = getFamiliesIds (  answList[-1][2:].split(";") )
@@ -51,6 +61,12 @@ with open ("answers.csv", "r") as file:
         elif answList[6] == "Нет": answList[6] = 0
         elif answList[6]: answList[6] = 2
 
-        with open ( "./nodb/mushrooms/" + answList[2], "w" ) as file:
-            for i in answList:
-                file.write ( str ( i ) + "\n" )
+        with open ( "./nodb/mushrooms/" + answList[2] + ".json", "w" ) as file:
+            file.write ( "{\n" )
+            for index, item in enumerate ( answList ):
+                if index == len (answList) - 1:
+                    file.write ( "\t\"" + formating[index] + "\" : \"" + str ( item ) + "\"\n" )
+                else:
+                    file.write ( "\t\"" + formating[index] + "\" : \"" + str ( item ) + "\",\n" )
+ 
+            file.write ( "}" )

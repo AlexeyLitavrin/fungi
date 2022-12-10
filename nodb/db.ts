@@ -1,17 +1,15 @@
-import * as fs from 'fs';
-
 const IMGPATH = "./images/"
 const FILEPATH = "./mushrooms/"
 
-const FAMILIES: string[] = fs.readFileSync( "./families" ,'utf8').trim().split("\n");
-const ZONES: string[] = fs.readFileSync( "./zones" ,'utf8').trim().split("\n");
+//const FAMILIES: string[] = fs.readFileSync( "./families" ,'utf8').trim().split("\n");
+//const ZONES: string[] = fs.readFileSync( "./zones" ,'utf8').trim().split("\n");
 
 //console.log( ZONES )
 
 class Mushroom {
   public readonly appendDate: Date;
   public readonly name: string;
-  public readonly index: number | string;
+  public readonly id: number | string;
   public readonly zone: number[];
   public readonly gmapsLink: string;
   public readonly redBook: boolean | string;
@@ -19,33 +17,33 @@ class Mushroom {
   public readonly description: string;
   public readonly familie: number[];
 
-  constructor ( list: string[] ){
+  constructor ( obj: { time: string; name: string, id: string, zones: string, gmapsLink: string, redBook: string, eatable: string, description: string, familie:string, } ){
 
-    this.appendDate= new Date ( Date.parse( list[0] ));
-    this.name= list[1];
-    this.index= list[2]; 
+    this.appendDate= new Date ( Date.parse( obj.time ));
+    this.name= obj.name;
+    this.id= obj.id; 
 
-    this.zone = list[3].slice(0,-1).split(";").map ( item => +item);
+    this.zone = obj.zones.slice(0,-1).split(";").map ( item => +item);
 
-    this.gmapsLink= list[4];
+    this.gmapsLink= obj.gmapsLink;
 
-    if ( list[5] == "1" ) this.redBook = true;
-    else if ( list[5] == "0" ) this.redBook = false;
-    else this.redBook = list[5];
+    if ( obj.redBook == "1" ) this.redBook = true;
+    else if ( obj.redBook == "0" ) this.redBook = false;
+    else this.redBook = obj.redBook;
 
-    if ( list[6] == "1" ) this.eatable = true;
-    else if ( list[6] == "0" ) this.eatable = false;
+    if ( obj.eatable == "1" ) this.eatable = true;
+    else if ( obj.eatable == "0" ) this.eatable = false;
     else this.eatable = "50/50";
 
-    this.description = list[7];
+    this.description = obj.description;
 
-    this.familie = list[8].slice(0,-1).split(";").map ( item => +item);
+    this.familie = obj.familie.slice(0,-1).split(";").map ( item => +item);
   }
 
   show () {
     console.log ( "\n=== " + this.name + " ===\n" );
     console.log ( "Append date: " + this.appendDate.toString() );
-    console.log ( this.index );
+    console.log ( this.id );
     console.log ( this.zone );
     console.log ( this.gmapsLink );
     console.log ( this.redBook );
@@ -55,32 +53,32 @@ class Mushroom {
   }
 
   getImgSrc () {
-    return IMGPATH + this.index.toString () + ".jpg";
+    return IMGPATH + this.id.toString () + ".jpg";
   }
 }
 
-function getFileList ( path: string = FILEPATH ): string[] {
+function getFileList (): string[] {
+  let filelist =  require ( "./filelist.json" ).ids//JSON.parse (
 
-  let output: string[] = [];
-
-  fs.readdirSync(path).forEach((filename) => {
-    output.push ( filename );
-  });
-
-  return output;
+  return filelist.map ( (id: string) => id + ".json")
 }
 
 function parseMushrooms ( filelist: string[] ): Mushroom[] {
   let output: Mushroom[] = [];
   for ( let i = 0; i < filelist.length; i++ ){
-    output.push ( new Mushroom ( fs.readFileSync( FILEPATH + filelist[i] ,'utf8').trim().split("\n"))); 
+    output.push ( new Mushroom ( require ( FILEPATH + filelist[i]))); 
   }
   return output;
 }
 
-let mushrooms: Mushroom[] = parseMushrooms ( getFileList () )
-
-for ( let i = 0; i < mushrooms.length; i++ ){
-  mushrooms[i].show()
+function getAllMushrooms (): Mushroom[]{
+  return parseMushrooms ( getFileList () )
 }
+
+//console.log ( getFileList () )
+
+
+//for ( let i = 0; i < mushrooms.length; i++ ){
+//  mushrooms[i].show()
+//}
 
