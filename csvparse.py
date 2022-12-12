@@ -3,7 +3,7 @@ import drive.parser
 formating = [
         "time",
         "name",
-        "id",
+        "image",
         "zones",
         "gmapsLink",
         "redBook",
@@ -49,8 +49,9 @@ with open ("answers.csv", "r") as file:
              answList.append ( answer[index] )
 
 
-        answList[2] = answList[2].split("id=")[-1]
-        drive.parser.downloadFiles ( [answList[2]] )
+        drive.parser.downloadFiles ( [answList[2].split("id=")[-1]] )
+        answList[2] = "require ( \"./images/" + answList[2].split("id=")[-1] + ".jpg\")"
+        #drive.parser.downloadFiles ( [answList[2]] )
         answList[3] = getZoneIds ( answList[3].strip().split (";") )
 
         answList[-1] = getFamiliesIds (  answList[-1][2:].split(";") )
@@ -64,13 +65,14 @@ with open ("answers.csv", "r") as file:
 
         answLists.append (answList )
 
-    with open ( "./nodb/mushrooms.json", "w" ) as file:
-        file.write ( "{\n\t\"mushrooms\" : [\n" )
+    with open ( "./nodb/mushrooms.tsx", "w" ) as file:
+        file.write ( "const Mushrooms = {\n\t\"mushrooms\" : [\n" )
         for alIndex, answList in enumerate ( answLists ):
             file.write ( "\t{\n" )
             for index, item in enumerate ( answList ):
 
                 if index == len (answList) - 1: file.write ( "\t\t\"" + formating[index] + "\" : \"" + str ( item ) + "\"\n" )
+                elif "image" == formating[index]: file.write ( "\t\t\"" + formating[index] + "\" : " + str ( item ) + ",\n" )
                 else: file.write ( "\t\t\"" + formating[index] + "\" : \"" + str ( item ) + "\",\n" )
 
             print ( alIndex )
@@ -78,4 +80,4 @@ with open ("answers.csv", "r") as file:
             if ( alIndex == len ( answLists ) - 1 ): file.write ( "\n\t}\n" )
             else:file.write ( "\n\t},\n" )
 
-        file.write ( "\t]\n}" )
+        file.write ( "\t]\n};\n\nexport default Mushrooms;" )
