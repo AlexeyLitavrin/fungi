@@ -30,7 +30,7 @@ const MushList = {
 		"image" : require ( "./images/1HjVk-FhC8cAhy5FB6AbdItRQ1YGndsbs.jpg"),
 		"zones" : "4;",
 		"gmapsLink" : "https://urochishe.ru/gde-rastut-belyie-gribyi/?ysclid=lbgvbgneqb800610208",
-		"redBook" : "1",
+		"redBook" : "0",
 		"eatable" : "1",
 		"description" : "Белый гриб (также сокращённо: белый), или боровик (лат. Bolétus edúlis), — гриб из рода Боровик. Название отражает свойство мякоти не изменять цвет на срезе. Встречается повсеместно, широко распространён; отличается разнообразием форм и окрасок.",
 		"familie" : "9;"
@@ -50,7 +50,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 7:08:01 PM GMT+3",
-		"name" : "Boletus badius (Польский гриб)",
+		"name" : "Польский гриб (Boletus badius)",
 		"image" : require ( "./images/1QfWQsB_lfPtESL-Jphp5Gh6PXevyJvJg.jpg"),
 		"zones" : "1;2;4;",
 		"gmapsLink" : "https://goo.gl/maps/dEu7RYDzZ5cDFu1o9",
@@ -62,7 +62,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 7:19:04 PM GMT+3",
-		"name" : "Agaricus arvensis (Шампиньон полевой)",
+		"name" : "Шампиньон полевой (Agaricus arvensis)",
 		"image" : require ( "./images/1WT2hziAa-vhd50DgbiyAfK2GinpSYpre.jpg"),
 		"zones" : "4;5;6;",
 		"gmapsLink" : "https://goo.gl/maps/vUiZfLoocwtVzdS46",
@@ -74,7 +74,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 7:36:39 PM GMT+3",
-		"name" : "Craterellus cornucopioides (Лисичка чёрная)",
+		"name" : "Лисичка чёрная (Craterellus cornucopioides)",
 		"image" : require ( "./images/1FqDUZgRMEwSY3H_qxRdXz5BunhZuL0P0.jpg"),
 		"zones" : "4;",
 		"gmapsLink" : "https://goo.gl/maps/kQNFzuuX2ZUC6SDB8",
@@ -86,7 +86,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 7:49:23 PM GMT+3",
-		"name" : "Leucocybe candicans (Говорушка белёсая)",
+		"name" : "Говорушка белёсая (Leucocybe candicans)",
 		"image" : require ( "./images/11QNyM_yHiVl8Eo0cw634FGE9VdkMti-k.jpg"),
 		"zones" : "4;",
 		"gmapsLink" : "https://goo.gl/maps/i5TgskW52xnjd7uJA",
@@ -98,7 +98,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 7:57:41 PM GMT+3",
-		"name" : "Inocybe lacera (Волоконница разорванная)",
+		"name" : "Волоконница разорванная (Inocybe lacera)",
 		"image" : require ( "./images/157Jm3kCBky5kDQk1311WDjAjlVDv_ugm.jpg"),
 		"zones" : "4;",
 		"gmapsLink" : "https://goo.gl/maps/zsqGBqiGKhiNAHpt8",
@@ -110,7 +110,7 @@ const MushList = {
 	},
 	{
 		"time" : "2022/12/10 8:07:27 PM GMT+3",
-		"name" : "Hypholoma polytrichi (Ложноопёнок моховой)",
+		"name" : "Ложноопёнок моховой (Hypholoma polytrichi)",
 		"image" : require ( "./images/1lK_4F00CAHGkzsPVLDC0ymTY8sYr2iqi.jpg"),
 		"zones" : "4;",
 		"gmapsLink" : "https://goo.gl/maps/jPbNNq6uPbmEer5t8",
